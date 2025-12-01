@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"metachat/common/event-sourcing/events"
+	"github.com/metachat/common/event-sourcing/events"
 )
 
 // UserAggregate represents the user aggregate

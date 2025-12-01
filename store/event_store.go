@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"metachat/common/event-sourcing/events"
+	"github.com/metachat/common/event-sourcing/events"
 )
 
 // EventStore defines the interface for event storage

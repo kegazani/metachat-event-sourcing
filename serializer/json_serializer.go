@@ -3,7 +3,7 @@ package serializer
 import (
 	"encoding/json"
 
-	"metachat/common/event-sourcing/events"
+	"github.com/metachat/common/event-sourcing/events"
 )
 
 // Serializer defines the interface for event serialization
