@@ -3,7 +3,7 @@ package aggregates
 import (
 	"errors"
 
-	"github.com/metachat/common/event-sourcing/events"
+	"github.com/kegazani/metachat-event-sourcing/events"
 )
 
 // Aggregate represents a domain aggregate

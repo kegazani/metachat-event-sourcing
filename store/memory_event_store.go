@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/metachat/common/event-sourcing/events"
+	"github.com/kegazani/metachat-event-sourcing/events"
 )
 
 // MemoryEventStore is an in-memory implementation of EventStore
