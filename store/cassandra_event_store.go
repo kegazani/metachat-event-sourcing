@@ -112,7 +112,7 @@ func (c *CassandraEventStore) GetEventsByAggregateID(ctx context.Context, aggreg
 		aggregateUUID,
 	).Iter()
 
-	var events []*events.Event
+	var eventList []*events.Event
 	var eventID, eventType, payload, metadata string
 	var createdAt time.Time
 	var version int
@@ -133,14 +133,14 @@ func (c *CassandraEventStore) GetEventsByAggregateID(ctx context.Context, aggreg
 			Metadata:    metadataMap,
 		}
 
-		events = append(events, event)
+		eventList = append(eventList, event)
 	}
 
 	if err := iter.Close(); err != nil {
 		return nil, NewEventStoreError(ErrCodeStorage, "failed to retrieve events", err)
 	}
 
-	return events, nil
+	return eventList, nil
 }
 
 func (c *CassandraEventStore) GetEventsByType(ctx context.Context, eventType events.EventType) ([]*events.Event, error) {
@@ -151,7 +151,7 @@ func (c *CassandraEventStore) GetEventsByType(ctx context.Context, eventType eve
 		string(eventType),
 	).Iter()
 
-	var events []*events.Event
+	var eventList []*events.Event
 	var aggregateType, aggregateID, eventID, eventTypeStr, payload, metadata string
 	var createdAt time.Time
 	var version int
@@ -172,14 +172,14 @@ func (c *CassandraEventStore) GetEventsByType(ctx context.Context, eventType eve
 			Metadata:    metadataMap,
 		}
 
-		events = append(events, event)
+		eventList = append(eventList, event)
 	}
 
 	if err := iter.Close(); err != nil {
 		return nil, NewEventStoreError(ErrCodeStorage, "failed to retrieve events", err)
 	}
 
-	return events, nil
+	return eventList, nil
 }
 
 func (c *CassandraEventStore) GetEventsByAggregateIDAndVersion(ctx context.Context, aggregateID string, version int) ([]*events.Event, error) {
@@ -199,7 +199,7 @@ func (c *CassandraEventStore) GetEventsByAggregateIDAndVersion(ctx context.Conte
 		version,
 	).Iter()
 
-	var events []*events.Event
+	var eventList []*events.Event
 	var eventID, eventType, payload, metadata string
 	var createdAt time.Time
 	var eventVersion int
@@ -220,14 +220,14 @@ func (c *CassandraEventStore) GetEventsByAggregateIDAndVersion(ctx context.Conte
 			Metadata:    metadataMap,
 		}
 
-		events = append(events, event)
+		eventList = append(eventList, event)
 	}
 
 	if err := iter.Close(); err != nil {
 		return nil, NewEventStoreError(ErrCodeStorage, "failed to retrieve events", err)
 	}
 
-	return events, nil
+	return eventList, nil
 }
 
 func (c *CassandraEventStore) GetEventsByTimeRange(ctx context.Context, startTime, endTime string) ([]*events.Event, error) {
@@ -249,7 +249,7 @@ func (c *CassandraEventStore) GetEventsByTimeRange(ctx context.Context, startTim
 		end,
 	).Iter()
 
-	var events []*events.Event
+	var eventList []*events.Event
 	var aggregateType, aggregateID, eventID, eventType, payload, metadata string
 	var createdAt time.Time
 	var version int
@@ -270,14 +270,14 @@ func (c *CassandraEventStore) GetEventsByTimeRange(ctx context.Context, startTim
 			Metadata:    metadataMap,
 		}
 
-		events = append(events, event)
+		eventList = append(eventList, event)
 	}
 
 	if err := iter.Close(); err != nil {
 		return nil, NewEventStoreError(ErrCodeStorage, "failed to retrieve events", err)
 	}
 
-	return events, nil
+	return eventList, nil
 }
 
 func (c *CassandraEventStore) getAggregateType(aggregateID string) string {

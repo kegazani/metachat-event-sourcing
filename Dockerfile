@@ -1,17 +1,15 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
-# Copy go mod files
 COPY go.mod go.sum ./
 
-# Download dependencies
 RUN go mod download
 
-# Copy source code
 COPY . .
 
-# Build the library
+RUN go mod tidy
+
 RUN go build -a -installsuffix cgo .
 
 # This is a library, so we don't need a runtime stage
